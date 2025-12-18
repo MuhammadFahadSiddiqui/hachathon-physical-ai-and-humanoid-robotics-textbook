@@ -651,6 +651,15 @@ Now that you understand the theory, let's build three working ROS 2 examples!
 
 In this section, you'll run three real ROS 2 packages that demonstrate nodes, topics, and services. All code is located in the `ros2-examples/src/` directory of this repository.
 
+:::tip Download Code Examples
+You can download the complete ROS 2 packages as zip files:
+- [📦 minimal_publisher.zip](/examples/minimal_publisher.zip) - Publisher example
+- [📦 minimal_subscriber.zip](/examples/minimal_subscriber.zip) - Subscriber example
+- [📦 service_example.zip](/examples/service_example.zip) - Service example
+
+Extract these files to your `~/ros2_ws/src/` directory and run `colcon build` to use them.
+:::
+
 ### Example 1: Minimal Publisher
 
 The **minimal_publisher** package demonstrates how to publish messages to a topic at a fixed rate.
@@ -1279,10 +1288,12 @@ Congratulations! You've completed Chapter 1: ROS 2 Fundamentals. Here are the es
 
 ## What's Next?
 
-You now understand the core communication patterns in ROS 2. In the next chapters, you'll learn:
+### Next Chapters
+- **[Chapter 2: Python Agents & Controllers →](./chapter-2-python-agents-controllers.md)** - Build intelligent control loops that integrate AI decision-making with ROS 2
+- **[Chapter 3: Humanoid Robot Modeling with URDF →](./chapter-3-humanoid-modeling-urdf.md)** - Model robots using URDF for simulation and real-world deployment
 
-- **[Chapter 2: Python Agents & Controllers](./chapter-2-python-agents-controllers.md)** - Build intelligent control loops that integrate AI decision-making with ROS 2
-- **[Chapter 3: Humanoid Robot Modeling with URDF](./chapter-3-humanoid-modeling-urdf.md)** - Model robots using URDF for simulation and real-world deployment
+### Return to Start
+- **[↑ Back to Introduction](../intro.md)** - Course overview and prerequisites
 
 **Practice exercises:**
 1. Modify the publisher to publish at 10 Hz instead of 2 Hz

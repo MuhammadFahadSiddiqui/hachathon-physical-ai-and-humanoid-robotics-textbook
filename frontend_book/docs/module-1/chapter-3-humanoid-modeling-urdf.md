@@ -582,6 +582,12 @@ In this section, we'll create a complete URDF file for a simplified humanoid rob
 - **Right arm**: Upper arm + forearm (2 links, 2 joints)
 - **Total**: 5 links, 4 revolute joints
 
+:::tip Download URDF Example
+📦 [simple_humanoid_urdf.zip](/examples/simple_humanoid_urdf.zip) - Complete URDF model with launch files
+
+Extract to your `~/ros2_ws/` directory and follow the validation instructions below.
+:::
+
 ### Robot Structure Diagram
 
 ```mermaid
@@ -1495,3 +1501,31 @@ ros2 topic echo /joint_states --once
 - ✅ Joint states are published to `/joint_states` topic
 
 ---
+
+## What's Next?
+
+### Previous Chapters
+- **[← Chapter 2: Python Agents & Controllers](./chapter-2-python-agents-controllers.md)** - Review agent-based control systems
+- **[← Chapter 1: ROS 2 Fundamentals](./chapter-1-ros2-fundamentals.md)** - Review nodes, topics, and services
+
+### Return to Start
+- **[↑ Back to Introduction](../intro.md)** - Course overview and prerequisites
+
+**Practice exercises:**
+1. Add legs to the humanoid with hip and knee joints
+2. Create a head link with a neck joint for pan/tilt motion
+3. Replace box primitives with mesh files (.stl or .dae)
+4. Calculate inertia tensors for cylindrical links
+5. Export your URDF to Gazebo's SDF format
+
+**Additional resources:**
+- [ROS 2 URDF Tutorials](https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/URDF-Main.html)
+- [URDF XML Specification](http://wiki.ros.org/urdf/XML)
+- [RViz User Guide](https://github.com/ros2/rviz/blob/humble/docs/user_guide.md)
+- [Xacro Documentation](http://wiki.ros.org/xacro) - Advanced URDF macros
+
+---
+
+**Congratulations on completing Module 1: The Robotic Nervous System!**
+
+You've learned ROS 2 fundamentals, built intelligent agents, and modeled robots with URDF. You're now ready to integrate these skills for real-world robotics applications.

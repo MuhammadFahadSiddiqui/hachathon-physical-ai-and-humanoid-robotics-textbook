@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(if [ -d \"frontend_book\" ])",
+      "Bash([ -f \"frontend_book/package.json\" ])",
+      "Bash(then echo \"Docusaurus initialized successfully\")",
+      "Bash(cat:*)",
+      "Bash(else echo \"Docusaurus initialization still in progress or failed\")",
+      "Bash(fi)",
+      "Bash(npm run build:*)",
+      "Bash(powershell -Command \"Compress-Archive -Path ''module_1_urdf'' -DestinationPath ''..\\frontend_book\\static\\examples\\simple_humanoid_urdf.zip'' -Force\")"
+    ]
+  }
+}

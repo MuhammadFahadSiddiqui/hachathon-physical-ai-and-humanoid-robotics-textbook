@@ -255,15 +255,15 @@ ros2 topic echo /cmd_vel
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T072 [P] Run ruff linter on all Python code examples (ros2-examples/src/*) and fix any style violations per SC-008
-- [ ] T073 [P] Verify ROS 2 naming conventions across all packages (snake_case for topics/services, CamelCase for message types)
-- [ ] T074 [P] Create downloadable code package zips in static/examples/ (minimal_publisher.zip, minimal_subscriber.zip, service_example.zip, obstacle_avoidance_agent.zip, simple_humanoid_urdf.zip)
-- [ ] T075 [P] Create Mermaid diagrams for all conceptual sections (ROS 2 architecture, message flow, agent workflow) and validate syntax
-- [ ] T076 [P] Add alt-text to all images in static/img/ for accessibility compliance
-- [ ] T077 Test Docusaurus build with `npm run build` in docusaurus-book/ and verify no broken links or Markdown errors
+- [x] T072 [P] Run ruff linter on all Python code examples (ros2-examples/src/*) and fix any style violations per SC-008
+- [x] T073 [P] Verify ROS 2 naming conventions across all packages (snake_case for topics/services, CamelCase for message types)
+- [x] T074 [P] Create downloadable code package zips in static/examples/ (minimal_publisher.zip, minimal_subscriber.zip, service_example.zip, obstacle_avoidance_agent.zip, simple_humanoid_urdf.zip)
+- [x] T075 [P] Create Mermaid diagrams for all conceptual sections (ROS 2 architecture, message flow, agent workflow) and validate syntax
+- [x] T076 [P] Add alt-text to all images in static/img/ for accessibility compliance
+- [x] T077 Test Docusaurus build with `npm run build` in docusaurus-book/ and verify no broken links or Markdown errors
 - [ ] T078 [P] Validate all code examples run in clean ROS 2 Humble environment (colcon build succeeds, examples execute without errors)
-- [ ] T079 [P] Add navigation links between chapters (Chapter 1 → Chapter 2, Chapter 2 → Chapter 3, back to intro)
-- [ ] T080 Create deployment workflow (.github/workflows/deploy.yml) for GitHub Pages automated deployment on push to main
+- [x] T079 [P] Add navigation links between chapters (Chapter 1 → Chapter 2, Chapter 2 → Chapter 3, back to intro)
+- [x] T080 Create deployment workflow (.github/workflows/deploy.yml) for GitHub Pages automated deployment on push to main
 
 ---
 

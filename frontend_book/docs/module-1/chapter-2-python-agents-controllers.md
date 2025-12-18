@@ -335,6 +335,12 @@ Let's implement a complete obstacle avoidance agent.
 
 ## Agent Workflow Example: Obstacle Avoidance
 
+:::tip Download Code Example
+📦 [obstacle_avoidance_agent.zip](/examples/obstacle_avoidance_agent.zip) - Complete agent package with mock sensor
+
+Extract to your `~/ros2_ws/src/` directory and run `colcon build` to use it.
+:::
+
 ### Problem Statement
 
 **Goal:** Build an agent that navigates a robot forward while avoiding obstacles.
@@ -592,7 +598,7 @@ class MyAgent(Node):
 | High-level planning | 1-5 Hz | 0.2-1.0s |
 | Obstacle avoidance | 10-20 Hz | 0.05-0.1s |
 | Motor control | 50-100 Hz | 0.01-0.02s |
-| Safety checks | 100+ Hz | <0.01s |
+| Safety checks | 100+ Hz | \<0.01s |
 
 ---
 
@@ -890,9 +896,14 @@ self.timer = self.create_timer(0.1, self.process_scan)  # 10 Hz
 
 ## What's Next?
 
-You now understand how to build intelligent agents in ROS 2. In Chapter 3, you'll learn how to model physical robots using URDF:
+### Previous Chapter
+- **[← Chapter 1: ROS 2 Fundamentals](./chapter-1-ros2-fundamentals.md)** - Review nodes, topics, and services
 
-- **[Chapter 3: Humanoid Robot Modeling with URDF](./chapter-3-humanoid-modeling-urdf.md)** - Model robots with kinematic chains, joints, and visual representations
+### Next Chapter
+- **[Chapter 3: Humanoid Robot Modeling with URDF →](./chapter-3-humanoid-modeling-urdf.md)** - Model robots with kinematic chains, joints, and visual representations
+
+### Return to Start
+- **[↑ Back to Introduction](../intro.md)** - Course overview and prerequisites
 
 **Practice exercises:**
 1. Modify the obstacle threshold to 0.5m and observe behavior changes
