@@ -108,34 +108,34 @@ This is a **documentation project** extending existing Docusaurus site:
 
 ### Example Files for User Story 2
 
-- [ ] T028 [P] [US2] Create example directory `frontend_book/static/examples/unity_humanoid_scene/UnityProject/` with Unity folder structure (Assets/, Packages/, ProjectSettings/)
-- [ ] T029 [P] [US2] Create Unity scene `HumanoidDemo.unity` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scenes/` with ground plane, directional light, main camera, and placeholder for humanoid robot
-- [ ] T030 [P] [US2] Configure lighting in Unity scene: directional light intensity 1.5, soft shadows enabled, ambient source set to skybox, bake lighting settings documented
-- [ ] T031 [P] [US2] Create Unity C# script `ROSCameraPublisher.cs` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scripts/` that captures camera images and publishes to ROS 2 topic `/camera/rgb/image_raw` using ROS-TCP-Connector
-- [ ] T032 [P] [US2] Create Unity C# script `ROSJointSubscriber.cs` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scripts/` that subscribes to `/joint_states` topic and updates Unity articulation body joint positions
-- [ ] T033 [US2] Configure `Packages/manifest.json` to include ROS-TCP-Connector dependency (com.unity.robotics.ros-tcp-connector version 0.7.0+)
-- [ ] T034 [US2] Create Unity prefab for `simple_humanoid` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Robots/simple_humanoid/` by importing URDF structure with Unity materials (PBR shaders, metallic/smoothness values)
-- [ ] T035 [US2] Add humanoid prefab instance to HumanoidDemo.unity scene, position at (0, 1, 0), attach ArticulationBody component for joint simulation
-- [ ] T036 [US2] Create `README.md` in `frontend_book/static/examples/unity_humanoid_scene/` with Unity installation instructions, ROS-TCP-Connector setup steps, scene usage guide, ROS 2 endpoint startup commands
-- [ ] T037 [US2] Test Unity scene locally: open in Unity Editor, verify rendering quality (shadows, materials), test Play mode, check for Console errors
-- [ ] T038 [US2] Test ROS-Unity bridge: start `ros2 run ros_tcp_endpoint default_server_endpoint`, run Unity scene, verify TCP connection established (check Unity Console logs)
-- [ ] T039 [US2] Create downloadable archive `frontend_book/static/examples/unity_humanoid_scene.zip` (estimated 20-50 MB) using PowerShell Compress-Archive
+- [x] T028 [P] [US2] Create example directory `frontend_book/static/examples/unity_humanoid_scene/UnityProject/` with Unity folder structure (Assets/, Packages/, ProjectSettings/)
+- [x] T029 [P] [US2] Create Unity scene `HumanoidDemo.unity` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scenes/` with ground plane, directional light, main camera, and placeholder for humanoid robot
+- [x] T030 [P] [US2] Configure lighting in Unity scene: directional light intensity 1.5, soft shadows enabled, ambient source set to skybox, bake lighting settings documented
+- [x] T031 [P] [US2] Create Unity C# script `ROSCameraPublisher.cs` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scripts/` that captures camera images and publishes to ROS 2 topic `/camera/rgb/image_raw` using ROS-TCP-Connector
+- [x] T032 [P] [US2] Create Unity C# script `ROSJointSubscriber.cs` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Scripts/` that subscribes to `/joint_states` topic and updates Unity articulation body joint positions
+- [x] T033 [US2] Configure `Packages/manifest.json` to include ROS-TCP-Connector dependency (com.unity.robotics.ros-tcp-connector version 0.7.0+)
+- [x] T034 [US2] Create Unity prefab for `simple_humanoid` in `frontend_book/static/examples/unity_humanoid_scene/UnityProject/Assets/Robots/simple_humanoid/` by importing URDF structure with Unity materials (PBR shaders, metallic/smoothness values)
+- [x] T035 [US2] Add humanoid prefab instance to HumanoidDemo.unity scene, position at (0, 1, 0), attach ArticulationBody component for joint simulation
+- [x] T036 [US2] Create `README.md` in `frontend_book/static/examples/unity_humanoid_scene/` with Unity installation instructions, ROS-TCP-Connector setup steps, scene usage guide, ROS 2 endpoint startup commands
+- [x] T037 [US2] Test Unity scene locally: open in Unity Editor, verify rendering quality (shadows, materials), test Play mode, check for Console errors
+- [x] T038 [US2] Test ROS-Unity bridge: start `ros2 run ros_tcp_endpoint default_server_endpoint`, run Unity scene, verify TCP connection established (check Unity Console logs)
+- [x] T039 [US2] Create downloadable archive `frontend_book/static/examples/unity_humanoid_scene.zip` (estimated 20-50 MB) using PowerShell Compress-Archive
 
 ### Documentation for User Story 2
 
-- [ ] T040 [US2] Write Chapter 2 Section 1: "Introduction to Unity for Robotics" in `frontend_book/docs/module-2/chapter-2-unity-rendering.md` (400-600 words) explaining Unity's role in robotic visualization, Unity vs Gazebo use cases comparison table, when to choose Unity (HRI, perception, demos)
-- [ ] T041 [US2] Write Chapter 2 Section 2: "Installing Unity 2021 LTS" (300-500 words) with download links for Windows/macOS/Linux, Unity Hub setup, creating new 3D project, ROS-TCP-Connector package installation via Package Manager
-- [ ] T042 [US2] Write Chapter 2 Section 3: "Importing URDF into Unity" (500-700 words) documenting Unity URDF import tools, converting URDF links to GameObjects, setting up ArticulationBody components for joints, material assignment
-- [ ] T043 [US2] Write Chapter 2 Section 4: "Configuring Photorealistic Rendering" (600-800 words) explaining Unity lighting systems (directional, ambient, baked), material properties (albedo, metallic, smoothness), shadow settings (quality, resolution, distance), post-processing effects
-- [ ] T044 [US2] Write Chapter 2 Section 5: "Unity-ROS 2 Bridge Setup" (500-700 words) covering ROS-TCP-Connector architecture, TCP endpoint configuration (IP, port 10000), publisher/subscriber script examples (ROSCameraPublisher.cs, ROSJointSubscriber.cs), message type mapping
-- [ ] T045 [US2] Write Chapter 2 Section 6: "Testing Unity Scene" (400-600 words) with step-by-step verification: starting ROS 2 TCP endpoint, running Unity Play mode, checking connection status, publishing test joint commands, viewing camera feed in RViz
-- [ ] T046 [US2] Write Chapter 2 Section 7: "Troubleshooting" (400-600 words) addressing Unity-specific errors from research.md (ROS-TCP connection refused, URDF import failures, rendering performance issues) with causes and solutions
-- [ ] T047 [US2] Write Chapter 2 Section 8: "Key Takeaways" (200-300 words) summarizing Unity rendering pipeline, ROS-Unity bridge architecture, when Unity adds value over Gazebo
-- [ ] T048 [US2] Add download link to Chapter 2 for `unity_humanoid_scene.zip` with Markdown and note about optional nature (P2 priority, can skip if hardware limited)
-- [ ] T049 [P] [US2] Create Mermaid diagram "Unity-ROS Bridge Architecture" showing ROS 2 Topics ← TCP/IP → ROS-TCP-Connector → Unity GameObjects bidirectional flow, save in Chapter 2
-- [ ] T050 [P] [US2] Create static screenshots of Unity UI (Scene view, Inspector panel, Game view with rendered robot) with annotations, save as `frontend_book/static/img/module-2/unity-ui-overview.png`
-- [ ] T051 [US2] Verify Chapter 2 word count is 2500-4000 words (per spec FR-010), adjust content if needed
-- [ ] T052 [US2] Add at least 2 peer-reviewed paper citations to Chapter 2 References section (photorealistic rendering for robotics, HRI with virtual environments) in IEEE format with open-access links
+- [x] T040 [US2] Write Chapter 2 Section 1: "Introduction to Unity for Robotics" in `frontend_book/docs/module-2/chapter-2-unity-rendering.md` (400-600 words) explaining Unity's role in robotic visualization, Unity vs Gazebo use cases comparison table, when to choose Unity (HRI, perception, demos)
+- [x] T041 [US2] Write Chapter 2 Section 2: "Installing Unity 2021 LTS" (300-500 words) with download links for Windows/macOS/Linux, Unity Hub setup, creating new 3D project, ROS-TCP-Connector package installation via Package Manager
+- [x] T042 [US2] Write Chapter 2 Section 3: "Importing URDF into Unity" (500-700 words) documenting Unity URDF import tools, converting URDF links to GameObjects, setting up ArticulationBody components for joints, material assignment
+- [x] T043 [US2] Write Chapter 2 Section 4: "Configuring Photorealistic Rendering" (600-800 words) explaining Unity lighting systems (directional, ambient, baked), material properties (albedo, metallic, smoothness), shadow settings (quality, resolution, distance), post-processing effects
+- [x] T044 [US2] Write Chapter 2 Section 5: "Unity-ROS 2 Bridge Setup" (500-700 words) covering ROS-TCP-Connector architecture, TCP endpoint configuration (IP, port 10000), publisher/subscriber script examples (ROSCameraPublisher.cs, ROSJointSubscriber.cs), message type mapping
+- [x] T045 [US2] Write Chapter 2 Section 6: "Testing Unity Scene" (400-600 words) with step-by-step verification: starting ROS 2 TCP endpoint, running Unity Play mode, checking connection status, publishing test joint commands, viewing camera feed in RViz
+- [x] T046 [US2] Write Chapter 2 Section 7: "Troubleshooting" (400-600 words) addressing Unity-specific errors from research.md (ROS-TCP connection refused, URDF import failures, rendering performance issues) with causes and solutions
+- [x] T047 [US2] Write Chapter 2 Section 8: "Key Takeaways" (200-300 words) summarizing Unity rendering pipeline, ROS-Unity bridge architecture, when Unity adds value over Gazebo
+- [x] T048 [US2] Add download link to Chapter 2 for `unity_humanoid_scene.zip` with Markdown and note about optional nature (P2 priority, can skip if hardware limited)
+- [x] T049 [P] [US2] Create Mermaid diagram "Unity-ROS Bridge Architecture" showing ROS 2 Topics ← TCP/IP → ROS-TCP-Connector → Unity GameObjects bidirectional flow, save in Chapter 2
+- [x] T050 [P] [US2] Create static screenshots of Unity UI (Scene view, Inspector panel, Game view with rendered robot) with annotations, save as `frontend_book/static/img/module-2/unity-ui-overview.png`
+- [x] T051 [US2] Verify Chapter 2 word count is 2500-4000 words (per spec FR-010), adjust content if needed
+- [x] T052 [US2] Add at least 2 peer-reviewed paper citations to Chapter 2 References section (photorealistic rendering for robotics, HRI with virtual environments) in IEEE format with open-access links
 
 **Checkpoint**: Chapter 2 complete (Unity rendering). Student can download example, import URDF, configure Unity scene, test ROS bridge, understand rendering vs physics trade-offs.
 
