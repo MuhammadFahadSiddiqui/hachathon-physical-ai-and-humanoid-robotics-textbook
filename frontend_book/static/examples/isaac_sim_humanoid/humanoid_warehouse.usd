@@ -1,0 +1,38 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "Warehouse" (
+        doc = "Warehouse environment - create manually in Isaac Sim GUI"
+    )
+    {
+    }
+
+    def Xform "Humanoid" (
+        doc = "Humanoid robot imported from URDF - use import_urdf.py script"
+    )
+    {
+    }
+
+    def Xform "Lighting" (
+        doc = "Lighting setup - add DirectionalLight and DomeLight in Isaac Sim GUI"
+    )
+    {
+    }
+}
+
+# NOTE: This is a placeholder USD file.
+# Please create the full warehouse scene using Isaac Sim GUI:
+# 1. File → New
+# 2. Menu → Isaac Examples → Environments → Simple Warehouse
+# 3. Run scripts/import_urdf.py to add humanoid robot
+# 4. Add camera to /World/Humanoid/Head
+# 5. Configure lighting (directional + dome light)
+# 6. Save as humanoid_warehouse.usd
+#
+# See README.md for detailed instructions.

@@ -38,6 +38,17 @@ const sidebars: SidebarsConfig = {
         'module-2/chapter-3-sensor-simulation',
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac™)',
+      collapsed: false,
+      items: [
+        'module-3/index',
+        'module-3/chapter-1-isaac-sim',
+        'module-3/chapter-2-isaac-ros',
+        'module-3/chapter-3-nav2-bipedal',
+      ],
+    },
   ],
 };
 
