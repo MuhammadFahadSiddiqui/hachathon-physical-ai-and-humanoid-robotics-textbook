@@ -1,0 +1,34 @@
+# Isaac ROS Visual SLAM Parameters
+
+visual_slam:
+  ros__parameters:
+    # Feature detection
+    num_cameras: 2
+    min_num_images: 2
+    enable_rectified_pose: true
+    rectified_images: true
+
+    # Performance tuning
+    enable_imu_fusion: false
+    gyro_noise_density: 0.000244
+    gyro_random_walk: 0.000019393
+    accel_noise_density: 0.001862
+    accel_random_walk: 0.003
+
+    # Frames
+    map_frame: 'map'
+    odom_frame: 'odom'
+    base_frame: 'base_link'
+
+    # Visualization
+    enable_slam_visualization: true
+    enable_landmarks_view: true
+    enable_observations_view: true
+
+    # Debug
+    enable_debug_mode: false
+    debug_dump_path: '/tmp/cuvslam'
+
+    # Loop closure
+    enable_localization_n_mapping: true
+    enable_loop_closure: true

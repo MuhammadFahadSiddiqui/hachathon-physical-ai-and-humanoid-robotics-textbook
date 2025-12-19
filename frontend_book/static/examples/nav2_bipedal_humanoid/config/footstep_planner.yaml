@@ -1,0 +1,59 @@
+# Bipedal Footstep Planner Configuration (FUTURE REFERENCE)
+#
+# NOTE: This configuration is NOT IMPLEMENTED in the current tutorial.
+# The tutorial uses a simplified circular footprint (radius 0.3m) for navigation.
+#
+# For a full bipedal footstep planner, you would need:
+# 1. Kinematic constraints (step length, width, height)
+# 2. ZMP (Zero Moment Point) stability criteria
+# 3. Footstep collision checking
+# 4. Terrain adaptation
+#
+# Research papers for advanced implementations:
+# - Lee et al. (2024): "Adaptive Footstep Planning for Humanoid Navigation in Cluttered Environments"
+#   https://ieeexplore.ieee.org/document/10610234
+# - Li et al. (2024): "Real-Time ZMP-Based Footstep Planning for Bipedal Robots"
+#   https://doi.org/10.1177/02783649231225678
+
+# Example footstep planner parameters (pseudocode, not functional):
+#
+# footstep_planner:
+#   ros__parameters:
+#     # Kinematic constraints
+#     step_length_max: 0.25        # Maximum forward step (meters)
+#     step_length_min: 0.05        # Minimum forward step
+#     step_width_max: 0.15         # Maximum lateral step
+#     step_height_max: 0.10        # Maximum step-over height
+#     step_duration: 0.8           # Time per footstep (seconds)
+#
+#     # Stability constraints
+#     zmp_margin_x: 0.02           # ZMP safety margin (forward)
+#     zmp_margin_y: 0.01           # ZMP safety margin (lateral)
+#     com_height: 0.85             # Center of mass height (meters)
+#     foot_polygon: [[0.1, 0.05], [0.1, -0.05], [-0.1, -0.05], [-0.1, 0.05]]
+#
+#     # Planning parameters
+#     planning_horizon: 5.0        # Look-ahead distance (meters)
+#     replan_frequency: 2.0        # Replanning rate (Hz)
+#     goal_tolerance_xy: 0.10      # XY goal tolerance
+#     goal_tolerance_yaw: 0.15     # Yaw goal tolerance
+#
+#     # Terrain adaptation
+#     terrain_classifier_topic: "/terrain_classification"
+#     terrain_cost_weights:
+#       flat: 1.0
+#       sloped: 2.0
+#       stairs: 3.0
+#       rough: 4.0
+#
+#     # Collision checking
+#     collision_check_resolution: 0.05
+#     foot_clearance: 0.02         # Minimum clearance above obstacles
+#
+#     # Recovery behaviors
+#     enable_adaptive_stepping: true
+#     min_step_length_recovery: 0.03
+#     max_replanning_attempts: 5
+
+# For the current tutorial implementation, use DWB controller with circular footprint:
+# See nav2_params.yaml for the actual working configuration.
