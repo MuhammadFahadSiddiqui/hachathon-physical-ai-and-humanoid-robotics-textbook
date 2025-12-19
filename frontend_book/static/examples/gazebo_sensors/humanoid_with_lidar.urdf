@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot name="simple_humanoid_lidar">
+  <!--
+  Simple Humanoid Robot with LiDAR Sensor
+
+  This URDF extends the basic simple_humanoid with a 2D LiDAR sensor
+  mounted on top of the torso (base_link). The LiDAR uses Gazebo's
+  ray sensor plugin to simulate laser range finding.
+
+  Sensor Specifications:
+  - Type: 2D planar LiDAR (horizontal scan)
+  - Field of View (FOV): 240° (-120° to +120°)
+  - Range: 0.1m to 4.0m
+  - Samples: 640 (angular resolution: 240°/640 ≈ 0.375° per sample)
+  - Update Rate: 10 Hz
+  - Noise: Gaussian with stddev 0.01m (1cm error)
+
+  ROS 2 Topic Output:
+  - Topic: /scan
+  - Message Type: sensor_msgs/LaserScan
+  - Frame: lidar_link
+
+  Module: 2 - The Digital Twin
+  Chapter: 3 - Sensor Simulation
+  Author: AI-Driven Robotics Textbook
+  Date: 2025-12-19
+  -->
+
+  <!-- BASE LINK (Torso) - Simplified version without arms for sensor focus -->
+  <link name="base_link">
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0"
+               iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+  </gazebo>
+
+  <!-- LIDAR SENSOR LINK -->
+  <!-- Mounted on top of base_link torso at height 1.05m -->
+  <link name="lidar_link">
+    <inertial>
+      <mass value="0.1"/>  <!-- 100g lidar unit -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+
+    <!-- Visual representation (small cylinder representing LiDAR) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>  <!-- 5cm radius, 5cm height -->
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint connecting LiDAR to base_link -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <!-- Position: center of torso top (0, 0, 1.05m) -->
+    <origin xyz="0 0 1.05" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Gazebo LiDAR Plugin Configuration -->
+  <gazebo reference="lidar_link">
+    <material>Gazebo/Black</material>
+
+    <!-- GPU Ray Sensor Plugin (faster than CPU version) -->
+    <sensor type="gpu_ray" name="lidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>  <!-- Show red rays in Gazebo GUI -->
+      <update_rate>10.0</update_rate>  <!-- 10 Hz scan rate -->
+
+      <!-- Ray Configuration -->
+      <ray>
+        <!-- Horizontal Scan (240° FOV) -->
+        <scan>
+          <horizontal>
+            <samples>640</samples>  <!-- Number of laser samples -->
+            <resolution>1</resolution>  <!-- Ray density multiplier -->
+            <min_angle>-2.0944</min_angle>  <!-- -120° in radians -->
+            <max_angle>2.0944</max_angle>   <!-- +120° in radians -->
+          </horizontal>
+        </scan>
+
+        <!-- Range Limits -->
+        <range>
+          <min>0.10</min>  <!-- Minimum detection range: 10cm -->
+          <max>4.0</max>   <!-- Maximum detection range: 4m -->
+          <resolution>0.01</resolution>  <!-- Range resolution: 1cm -->
+        </range>
+
+        <!-- Gaussian Noise Model -->
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>  <!-- No systematic bias -->
+          <stddev>0.01</stddev>  <!-- 1cm standard deviation -->
+        </noise>
+      </ray>
+
+      <!-- ROS 2 Plugin for Publishing LaserScan Messages -->
+      <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace></namespace>  <!-- Empty namespace (use global) -->
+          <remapping>~/out:=/scan</remapping>  <!-- Publish to /scan topic -->
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>  <!-- TF frame for sensor data -->
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
