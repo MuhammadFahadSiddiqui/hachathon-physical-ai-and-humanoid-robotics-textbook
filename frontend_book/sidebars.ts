@@ -27,6 +27,17 @@ const sidebars: SidebarsConfig = {
         'module-1/chapter-3-humanoid-modeling-urdf',
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 2: The Digital Twin (Gazebo & Unity)',
+      collapsed: false,
+      items: [
+        'module-2/index',
+        'module-2/chapter-1-gazebo-physics',
+        'module-2/chapter-2-unity-rendering',
+        'module-2/chapter-3-sensor-simulation',
+      ],
+    },
   ],
 };
 
