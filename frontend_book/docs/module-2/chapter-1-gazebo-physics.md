@@ -492,7 +492,7 @@ export DISPLAY=:0
 gazebo --version
 ```
 
-### Issue: Physics Simulation is Extremely Slow (<10 FPS)
+### Issue: Physics Simulation is Extremely Slow (&lt;10 FPS)
 
 **Symptoms**: Gazebo GUI freezes, physics lags real-time.
 

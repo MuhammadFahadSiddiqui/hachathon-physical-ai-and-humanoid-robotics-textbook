@@ -532,8 +532,8 @@ position: [0.5, -0.3, -0.5, 0.3]}" --once
 - In Unity Game view: Window → Analysis → Stats
 - **Rendering Stats**:
   - FPS (Frames Per Second): Should be ≥30 FPS on 16GB RAM + GTX 1050
-  - Draw Calls: <100 for simple scene
-  - Triangles: <50k for simple_humanoid
+  - Draw Calls: &lt;100 for simple scene
+  - Triangles: &lt;50k for simple_humanoid
 
 **Check ROS Latency**:
 ```bash
