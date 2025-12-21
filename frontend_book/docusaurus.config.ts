@@ -15,14 +15,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://governor-sindh-it-initiative.github.io',
+  url: 'https://MuhammadFahadSiddiqui.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/hachathon-physical-ai-and-humanoid-robotics-textbook/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'governor-sindh-it-initiative', // Usually your GitHub org/user name.
+  organizationName: 'MuhammadFahadSiddiqui', // Usually your GitHub org/user name.
   projectName: 'hachathon-physical-ai-and-humanoid-robotics-textbook', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -46,7 +46,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/governor-sindh-it-initiative/hachathon-physical-ai-and-humanoid-robotics-textbook/tree/main/frontend_book/',
+            'https://github.com/MuhammadFahadSiddiqui/hachathon-physical-ai-and-humanoid-robotics-textbook/tree/main/frontend_book/',
         },
         blog: {
           showReadingTime: true,
@@ -57,7 +57,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/governor-sindh-it-initiative/hachathon-physical-ai-and-humanoid-robotics-textbook/tree/main/frontend_book/',
+            'https://github.com/MuhammadFahadSiddiqui/hachathon-physical-ai-and-humanoid-robotics-textbook/tree/main/frontend_book/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -111,7 +111,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/governor-sindh-it-initiative/hachathon-physical-ai-and-humanoid-robotics-textbook',
+          href: 'https://github.com/MuhammadFahadSiddiqui/hachathon-physical-ai-and-humanoid-robotics-textbook',
           label: 'GitHub',
           position: 'right',
         },
@@ -146,7 +146,7 @@ const config: Config = {
             },
             {
               label: 'GitHub Repository',
-              href: 'https://github.com/governor-sindh-it-initiative/hachathon-physical-ai-and-humanoid-robotics-textbook',
+              href: 'https://github.com/MuhammadFahadSiddiqui/hachathon-physical-ai-and-humanoid-robotics-textbook',
             },
           ],
         },
