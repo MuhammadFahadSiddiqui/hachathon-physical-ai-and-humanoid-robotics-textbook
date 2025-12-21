@@ -11,32 +11,32 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Module 1: ROS 2 Fundamentals',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Master the Robot Operating System 2 middleware, build Python agents,
+        and model humanoid robots with URDF. The foundation for all robotics development.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Module 2: The Digital Twin',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Simulate robots in <strong>Gazebo</strong> with realistic physics, render in <strong>Unity</strong>
+        for photorealism, and configure <strong>sensors</strong> (LiDAR, cameras, IMU) with accurate noise models.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Hands-On Learning',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Every chapter includes runnable examples, downloadable code, practice exercises,
+        and troubleshooting guides. Build real robots, not just theory.
       </>
     ),
   },

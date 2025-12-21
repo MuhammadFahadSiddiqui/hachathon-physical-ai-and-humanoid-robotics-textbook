@@ -27,6 +27,28 @@ const sidebars: SidebarsConfig = {
         'module-1/chapter-3-humanoid-modeling-urdf',
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 2: The Digital Twin (Gazebo & Unity)',
+      collapsed: false,
+      items: [
+        'module-2/index',
+        'module-2/chapter-1-gazebo-physics',
+        'module-2/chapter-2-unity-rendering',
+        'module-2/chapter-3-sensor-simulation',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac™)',
+      collapsed: false,
+      items: [
+        'module-3/index',
+        'module-3/chapter-1-isaac-sim',
+        'module-3/chapter-2-isaac-ros',
+        'module-3/chapter-3-nav2-bipedal',
+      ],
+    },
   ],
 };
 

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<robot name="simple_humanoid_depth_camera">
+  <!--
+  Simple Humanoid Robot with Depth Camera Sensor
+
+  This URDF extends the basic simple_humanoid with a depth camera sensor
+  mounted on the front of the torso (base_link). The depth camera uses Gazebo's
+  camera plugin with depth image generation.
+
+  Sensor Specifications:
+  - Type: RGB-D Camera (color + depth)
+  - Resolution: 1280x720 pixels (HD)
+  - Horizontal FOV: 87° (1.51844 radians)
+  - Vertical FOV: 58° (calculated from aspect ratio)
+  - Depth Range: 0.3m to 10.0m
+  - Depth Format: 16-bit (R16) float
+  - Update Rate: 30 Hz (video framerate)
+  - Noise: Gaussian with stddev 0.007m (7mm error)
+
+  ROS 2 Topic Outputs:
+  - /camera/rgb/image_raw - Color image (sensor_msgs/Image, rgb8 encoding)
+  - /camera/depth/image_raw - Depth image (sensor_msgs/Image, 16UC1 encoding)
+  - /camera/rgb/camera_info - Camera calibration info
+  - /camera/depth/camera_info - Depth camera calibration info
+  - /camera/points - Point cloud (sensor_msgs/PointCloud2)
+
+  Module: 2 - The Digital Twin
+  Chapter: 3 - Sensor Simulation
+  Author: AI-Driven Robotics Textbook
+  Date: 2025-12-19
+  -->
+
+  <!-- BASE LINK (Torso) -->
+  <link name="base_link">
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0"
+               iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+  </gazebo>
+
+  <!-- DEPTH CAMERA LINK -->
+  <!-- Mounted on front face of torso at chest height (0.8m) -->
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.05"/>  <!-- 50g camera unit -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+
+    <!-- Visual representation (small box representing depth camera) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.09 0.025"/>  <!-- 3cm deep, 9cm wide, 2.5cm tall -->
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.09 0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint connecting camera to base_link -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <!-- Position: front face of torso (y = 0.1 + 0.015), chest height (z = 0.8) -->
+    <origin xyz="0 0.115 0.8" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Optical Frame (standard camera convention: Z forward, X right, Y down) -->
+  <link name="camera_optical_frame"/>
+
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_optical_frame"/>
+    <!-- Rotate to optical frame: X right, Y down, Z forward -->
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+  <!-- Gazebo Depth Camera Plugin Configuration -->
+  <gazebo reference="camera_link">
+    <material>Gazebo/Black</material>
+
+    <!-- Camera Sensor with Depth -->
+    <sensor type="depth" name="depth_camera_sensor">
+      <update_rate>30.0</update_rate>  <!-- 30 Hz (video framerate) -->
+      <visualize>true</visualize>  <!-- Show camera frustum in Gazebo GUI -->
+
+      <!-- Camera Configuration -->
+      <camera name="depth_camera">
+        <!-- Horizontal FOV: 87° (1.51844 radians, similar to Kinect/RealSense) -->
+        <horizontal_fov>1.51844</horizontal_fov>
+
+        <!-- Image Resolution: 1280x720 (HD 720p) -->
+        <image>
+          <width>1280</width>
+          <height>720</height>
+          <format>R8G8B8</format>  <!-- RGB color format -->
+        </image>
+
+        <!-- Clipping Planes (depth range) -->
+        <clip>
+          <near>0.3</near>  <!-- Minimum depth: 30cm -->
+          <far>10.0</far>   <!-- Maximum depth: 10m -->
+        </clip>
+
+        <!-- Gaussian Noise for Depth Channel -->
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>  <!-- 7mm standard deviation (realistic depth noise) -->
+        </noise>
+      </camera>
+
+      <!-- ROS 2 Plugin for Publishing Depth Camera Data -->
+      <plugin name="depth_camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace></namespace>
+          <remapping>color/image_raw:=/camera/rgb/image_raw</remapping>
+          <remapping>color/camera_info:=/camera/rgb/camera_info</remapping>
+          <remapping>depth/image_raw:=/camera/depth/image_raw</remapping>
+          <remapping>depth/camera_info:=/camera/depth/camera_info</remapping>
+          <remapping>points:=/camera/points</remapping>
+        </ros>
+
+        <!-- Camera Settings -->
+        <camera_name>camera</camera_name>
+        <frame_name>camera_optical_frame</frame_name>  <!-- TF frame for sensor data -->
+
+        <!-- Depth Image Settings -->
+        <min_depth>0.3</min_depth>  <!-- Match camera near clip -->
+        <max_depth>10.0</max_depth>  <!-- Match camera far clip -->
+
+        <!-- Point Cloud Generation -->
+        <point_cloud_cutoff>0.3</point_cloud_cutoff>  <!-- Ignore points closer than 30cm -->
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

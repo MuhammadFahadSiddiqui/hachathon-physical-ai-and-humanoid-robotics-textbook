@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<robot name="simple_humanoid_imu">
+  <!--
+  Simple Humanoid Robot with IMU Sensor
+
+  This URDF extends the basic simple_humanoid with an Inertial Measurement Unit (IMU)
+  mounted inside the torso (base_link). The IMU uses Gazebo's IMU sensor plugin to
+  simulate accelerometer, gyroscope, and orientation measurements.
+
+  Sensor Specifications:
+  - Type: 6-DOF IMU (3-axis accelerometer + 3-axis gyroscope)
+  - Orientation Output: Quaternion (w, x, y, z)
+  - Gyroscope Range: ±2000°/s (±34.9 rad/s)
+  - Accelerometer Range: ±16g (±156.96 m/s²)
+  - Update Rate: 100 Hz (typical for robotics IMUs)
+  - Noise Model: Realistic bias drift and random walk
+
+  Noise Parameters:
+  - Gyroscope Noise Density: 0.0003 rad/s/√Hz
+  - Gyroscope Bias Stability: 0.00005 rad/s
+  - Accelerometer Noise Density: 0.002 m/s²/√Hz
+  - Accelerometer Bias Stability: 0.0001 m/s²
+
+  ROS 2 Topic Output:
+  - Topic: /imu
+  - Message Type: sensor_msgs/Imu
+  - Fields:
+    - orientation (quaternion): Robot orientation in 3D space
+    - angular_velocity (x, y, z): Rotation rates in rad/s
+    - linear_acceleration (x, y, z): Linear accelerations in m/s²
+  - Frame: imu_link
+
+  Module: 2 - The Digital Twin
+  Chapter: 3 - Sensor Simulation
+  Author: AI-Driven Robotics Textbook
+  Date: 2025-12-19
+  -->
+
+  <!-- BASE LINK (Torso) -->
+  <link name="base_link">
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0"
+               iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.2 1.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+  </gazebo>
+
+  <!-- IMU SENSOR LINK -->
+  <!-- Mounted inside torso at center of mass (0, 0, 0.5m) -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.001"/>  <!-- 1g IMU chip (negligible mass) -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0000001" ixy="0.0" ixz="0.0"
+               iyy="0.0000001" iyz="0.0" izz="0.0000001"/>
+    </inertial>
+
+    <!-- Visual representation (tiny box, invisible in Gazebo) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>  <!-- 1cm cube -->
+      </geometry>
+      <material name="red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint connecting IMU to base_link (fixed at center of mass) -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <!-- Position: center of base_link mass (0, 0, 0.5m) -->
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Gazebo IMU Plugin Configuration -->
+  <gazebo reference="imu_link">
+    <material>Gazebo/Red</material>
+    <gravity>true</gravity>  <!-- IMU measures gravity as upward acceleration -->
+
+    <!-- IMU Sensor -->
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>  <!-- Continuously publish data -->
+      <update_rate>100.0</update_rate>  <!-- 100 Hz sampling rate -->
+      <visualize>true</visualize>  <!-- Show IMU axes in Gazebo GUI -->
+
+      <!-- IMU Configuration -->
+      <imu>
+        <!-- Gyroscope Noise Model (angular velocity measurement) -->
+        <angular_velocity>
+          <!-- X-axis gyroscope -->
+          <x>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.0003</stddev>  <!-- Noise density: 0.0003 rad/s/√Hz -->
+              <bias_mean>0.00005</bias_mean>  <!-- Bias stability: 0.00005 rad/s -->
+              <bias_stddev>0.00001</bias_stddev>  <!-- Bias variation -->
+            </noise>
+          </x>
+
+          <!-- Y-axis gyroscope -->
+          <y>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.0003</stddev>
+              <bias_mean>0.00005</bias_mean>
+              <bias_stddev>0.00001</bias_stddev>
+            </noise>
+          </y>
+
+          <!-- Z-axis gyroscope -->
+          <z>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.0003</stddev>
+              <bias_mean>0.00005</bias_mean>
+              <bias_stddev>0.00001</bias_stddev>
+            </noise>
+          </z>
+        </angular_velocity>
+
+        <!-- Accelerometer Noise Model (linear acceleration measurement) -->
+        <linear_acceleration>
+          <!-- X-axis accelerometer -->
+          <x>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.002</stddev>  <!-- Noise density: 0.002 m/s²/√Hz -->
+              <bias_mean>0.0001</bias_mean>  <!-- Bias stability: 0.0001 m/s² -->
+              <bias_stddev>0.00005</bias_stddev>  <!-- Bias variation -->
+            </noise>
+          </x>
+
+          <!-- Y-axis accelerometer -->
+          <y>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.002</stddev>
+              <bias_mean>0.0001</bias_mean>
+              <bias_stddev>0.00005</bias_stddev>
+            </noise>
+          </y>
+
+          <!-- Z-axis accelerometer -->
+          <z>
+            <noise type="gaussian">
+              <mean>0.0</mean>
+              <stddev>0.002</stddev>
+              <bias_mean>0.0001</bias_mean>
+              <bias_stddev>0.00005</bias_stddev>
+            </noise>
+          </z>
+        </linear_acceleration>
+      </imu>
+
+      <!-- ROS 2 Plugin for Publishing IMU Data -->
+      <plugin name="imu_controller" filename="libgazebo_ros_imu_sensor.so">
+        <ros>
+          <namespace></namespace>
+          <remapping>~/out:=/imu</remapping>  <!-- Publish to /imu topic -->
+        </ros>
+
+        <!-- IMU Frame (for TF transforms) -->
+        <frame_name>imu_link</frame_name>
+
+        <!-- Initial Orientation -->
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+
+        <!-- Update Rate (matches sensor update rate) -->
+        <update_rate>100.0</update_rate>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

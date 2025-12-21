@@ -8,11 +8,13 @@ Welcome to the comprehensive textbook on **Physical AI & Humanoid Robotics**. Th
 
 ## What You'll Learn
 
-This textbook covers three critical domains of humanoid robotics development:
+This textbook covers the complete robotics development pipeline:
 
 1. **ROS 2 Fundamentals** - Master the Robot Operating System 2, the industry-standard middleware for robotic applications
 2. **Python Agents & Controllers** - Build intelligent control systems that bridge high-level decision-making with low-level hardware
 3. **URDF Modeling** - Model humanoid robots using the Unified Robot Description Format for simulation and real-world deployment
+4. **Digital Twin Simulation** - Test robots in Gazebo physics engine and Unity rendering before hardware deployment
+5. **Sensor Simulation** - Configure realistic LiDAR, depth cameras, and IMU sensors with accurate noise models
 
 ## Course Structure
 
@@ -25,6 +27,18 @@ Module 1 introduces ROS 2 as the "nervous system" of robotic applications. You'l
 - **[Chapter 1: ROS 2 Fundamentals](./module-1/chapter-1-ros2-fundamentals.md)** - Nodes, topics, services, and the ROS 2 graph
 - **[Chapter 2: Python Agents & Controllers](./module-1/chapter-2-python-agents-controllers.md)** - Building intelligent control loops with rclpy
 - **[Chapter 3: Humanoid Robot Modeling with URDF](./module-1/chapter-3-humanoid-modeling-urdf.md)** - Kinematic chains, joints, and visual models
+
+### Module 2: The Digital Twin (Gazebo & Unity)
+
+Module 2 teaches you to simulate humanoid robots in realistic physics environments before deploying to hardware. You'll master Gazebo for accurate physics, Unity for photorealistic rendering, and sensor simulation for SLAM and perception algorithms.
+
+**Chapters:**
+
+- **[Chapter 1: Gazebo Physics](./module-2/chapter-1-gazebo-physics.md)** - Gravity, collision detection, joint dynamics, and ROS 2 integration
+- **[Chapter 2: Unity Rendering](./module-2/chapter-2-unity-rendering.md)** - Photorealistic visualization, materials, lighting, and ROS-TCP bridge
+- **[Chapter 3: Sensor Simulation](./module-2/chapter-3-sensor-simulation.md)** - LiDAR, depth cameras, IMU with realistic noise models
+
+**Downloads:** [gazebo_humanoid_world.zip](/examples/gazebo_humanoid_world.zip) | [unity_humanoid_scene.zip](/examples/unity_humanoid_scene.zip) | [gazebo_sensors.zip](/examples/gazebo_sensors.zip)
 
 ## Prerequisites
 
@@ -46,9 +60,13 @@ Each chapter follows a consistent structure:
 
 ## Getting Started
 
-Ready to begin? Start with our [Setup Guide](./setup-guide.md) to install ROS 2 Humble, then dive into [Chapter 1: ROS 2 Fundamentals](./module-1/chapter-1-ros2-fundamentals.md).
+Ready to begin? Follow this learning path:
 
-All code examples are available in the `ros2-examples/` directory of this repository.
+1. **[Setup Guide](./setup-guide.md)** - Install ROS 2 Humble and required tools
+2. **[Module 1: ROS 2 Fundamentals](./module-1/chapter-1-ros2-fundamentals.md)** - Learn ROS 2 basics, Python agents, and URDF modeling
+3. **[Module 2: The Digital Twin](./module-2/index.md)** - Master Gazebo physics, Unity rendering, and sensor simulation
+
+All code examples and downloadable .zip files are included in each chapter.
 
 ## About This Project
 
@@ -58,6 +76,8 @@ This textbook is part of the **Governor Sindh IT Initiative** hackathon project 
 - **Docusaurus 3.x** - Static site generation with React
 - **ROS 2 Humble** - Long-term support release of Robot Operating System 2
 - **Python 3.10+** - Primary programming language for ROS 2 examples
+- **Gazebo Classic 11** - Physics simulation engine with ODE/Bullet/Simbody support
+- **Unity 2021 LTS** - Photorealistic rendering engine with ROS-TCP bridge
 - **Mermaid.js** - Diagram rendering for architecture visualizations
 
 ---
