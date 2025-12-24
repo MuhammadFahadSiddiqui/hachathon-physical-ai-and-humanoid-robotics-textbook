@@ -1,0 +1,148 @@
+{
+  "action_primitives": {
+    "navigate": {
+      "description": "Move to a target location or coordinates",
+      "parameters": {
+        "target": {
+          "type": "string | array",
+          "description": "Location name or [x, y, theta] coordinates",
+          "examples": ["kitchen", "table", [1.5, 2.0, 0.0]]
+        }
+      },
+      "expected_duration": 15.0
+    },
+    "stop": {
+      "description": "Emergency stop - halt all motion immediately",
+      "parameters": {},
+      "expected_duration": 0.5
+    },
+    "follow": {
+      "description": "Track a moving target (person, object)",
+      "parameters": {
+        "target_class": {
+          "type": "string",
+          "description": "Class to follow",
+          "allowed_values": ["person", "robot", "moving_object"]
+        },
+        "distance": {
+          "type": "float",
+          "description": "Following distance in meters",
+          "range": [0.5, 10.0],
+          "default": 2.0
+        }
+      },
+      "expected_duration": 30.0
+    },
+    "detect_object": {
+      "description": "Scan for objects matching a class using vision",
+      "parameters": {
+        "object_class": {
+          "type": "string",
+          "description": "Object class to detect (e.g., bottle, cube, person)"
+        },
+        "max_results": {
+          "type": "integer",
+          "description": "Maximum number of detections",
+          "range": [1, 20],
+          "default": 5
+        }
+      },
+      "expected_duration": 3.0
+    },
+    "scan_environment": {
+      "description": "Perform 360° LIDAR scan to update occupancy map",
+      "parameters": {},
+      "expected_duration": 5.0
+    },
+    "grasp": {
+      "description": "Close gripper around detected object",
+      "parameters": {
+        "object_id": {
+          "type": "string",
+          "description": "ID of detected object (from detect_object)"
+        },
+        "force": {
+          "type": "float",
+          "description": "Gripper force in Newtons",
+          "range": [0, 50],
+          "default": 10.0
+        }
+      },
+      "preconditions": ["detect_object must be called before grasp"],
+      "expected_duration": 4.0
+    },
+    "release": {
+      "description": "Open gripper and drop held object",
+      "parameters": {},
+      "expected_duration": 2.0
+    },
+    "open_gripper": {
+      "description": "Set gripper to open position",
+      "parameters": {
+        "width": {
+          "type": "float",
+          "description": "Gripper width in meters",
+          "range": [0, 0.15],
+          "default": 0.08
+        }
+      },
+      "expected_duration": 1.5
+    },
+    "close_gripper": {
+      "description": "Set gripper to closed position",
+      "parameters": {
+        "force": {
+          "type": "float",
+          "description": "Gripper force in Newtons",
+          "range": [0, 50],
+          "default": 5.0
+        }
+      },
+      "expected_duration": 1.5
+    },
+    "move_arm": {
+      "description": "Move arm to predefined pose",
+      "parameters": {
+        "pose_name": {
+          "type": "string",
+          "description": "Pose name",
+          "allowed_values": ["home", "ready", "stow", "neutral"]
+        }
+      },
+      "expected_duration": 3.0
+    },
+    "wait": {
+      "description": "Pause for specified duration",
+      "parameters": {
+        "duration": {
+          "type": "float",
+          "description": "Wait duration in seconds",
+          "range": [0, 60]
+        }
+      },
+      "expected_duration": "same as duration parameter"
+    },
+    "say": {
+      "description": "Text-to-speech output",
+      "parameters": {
+        "text": {
+          "type": "string",
+          "description": "Text to speak",
+          "max_length": 500
+        }
+      },
+      "expected_duration": 2.0
+    }
+  },
+  "known_locations": [
+    "kitchen",
+    "bedroom",
+    "living_room",
+    "bathroom",
+    "table",
+    "shelf",
+    "charging_station",
+    "home",
+    "user"
+  ]
+}

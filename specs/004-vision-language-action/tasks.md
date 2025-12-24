@@ -105,23 +105,23 @@ Educational content creation (not software development):
 ### Example Code (LLM Planner)
 
 - [X] T033 [P] [US2] Create llm_planner ROS 2 package structure in frontend_book/static/examples/llm_task_planner/llm_planner/ with package.xml, setup.py, __init__.py
-- [ ] T034 [P] [US2] Implement action_primitives.py in llm_planner/ defining 8-12 action primitive classes (Navigate, DetectObject, Grasp, Release, OpenGripper, CloseGripper, MoveJoint, Wait) with JSON schema validation, parameter bounds checking, precondition verification
-- [ ] T035 [P] [US2] Implement prompt_templates.py in llm_planner/ with system prompt (constraint to action primitives), 3-5 few-shot examples (simple → complex task decomposition), JSON output template, error handling instructions
-- [ ] T036 [P] [US2] Implement planner_node.py in llm_planner/ with LLM API client (OpenAI SDK for GPT-4, requests for Ollama), ROS 2 subscriber to /voice_commands, task planning function (send prompt to LLM, parse JSON response), plan validation, ROS 2 publisher to /task_plan topic
-- [ ] T037 [P] [US2] Create llm_planner.launch.py in frontend_book/static/examples/llm_task_planner/launch/ to launch planner_node with configurable LLM backend (gpt-4 or llama3.1), temperature, max_tokens
-- [ ] T038 [P] [US2] Create action_primitives.json in config/ with JSON schema definitions for all 8-12 action primitives (type, required parameters, optional parameters, parameter ranges, preconditions, expected_duration examples)
-- [ ] T039 [P] [US2] Create llm_config.yaml in config/ with LLM selection (model: "gpt-4-turbo" or "llama3.1:8b"), API settings (temperature: 0, max_tokens: 500), timeout: 15s
-- [ ] T040 [P] [US2] Create .env.example in frontend_book/static/examples/llm_task_planner/ with OPENAI_API_KEY and OLLAMA_HOST placeholders (comments: signup at platform.openai.com for GPT-4, or use localhost:11434 for Ollama)
-- [ ] T041 [US2] Write README.md in frontend_book/static/examples/llm_task_planner/ with LLM setup (GPT-4 API key or Ollama installation), ROS 2 package build, launch commands, testing (echo "go to table and pick up cup" to /voice_commands, verify /task_plan output), prompt engineering tips
+- [X] T034 [P] [US2] Implement action_primitives.py in llm_planner/ defining 8-12 action primitive classes (Navigate, DetectObject, Grasp, Release, OpenGripper, CloseGripper, MoveJoint, Wait) with JSON schema validation, parameter bounds checking, precondition verification
+- [X] T035 [P] [US2] Implement prompt_templates.py in llm_planner/ with system prompt (constraint to action primitives), 3-5 few-shot examples (simple → complex task decomposition), JSON output template, error handling instructions
+- [X] T036 [P] [US2] Implement planner_node.py in llm_planner/ with LLM API client (OpenAI SDK for GPT-4, requests for Ollama), ROS 2 subscriber to /voice_commands, task planning function (send prompt to LLM, parse JSON response), plan validation, ROS 2 publisher to /task_plan topic
+- [X] T037 [P] [US2] Create llm_planner.launch.py in frontend_book/static/examples/llm_task_planner/launch/ to launch planner_node with configurable LLM backend (gpt-4 or llama3.1), temperature, max_tokens
+- [X] T038 [P] [US2] Create action_primitives.json in config/ with JSON schema definitions for all 8-12 action primitives (type, required parameters, optional parameters, parameter ranges, preconditions, expected_duration examples)
+- [X] T039 [P] [US2] Create llm_config.yaml in config/ with LLM selection (model: "gpt-4-turbo" or "llama3.1:8b"), API settings (temperature: 0, max_tokens: 500), timeout: 15s
+- [X] T040 [P] [US2] Create .env.example in frontend_book/static/examples/llm_task_planner/ with OPENAI_API_KEY and OLLAMA_HOST placeholders (comments: signup at platform.openai.com for GPT-4, or use localhost:11434 for Ollama)
+- [X] T041 [US2] Write README.md in frontend_book/static/examples/llm_task_planner/ with LLM setup (GPT-4 API key or Ollama installation), ROS 2 package build, launch commands, testing (echo "go to table and pick up cup" to /voice_commands, verify /task_plan output), prompt engineering tips
 
 ### Validation (Chapter 2)
 
-- [ ] T042 [US2] Validate Chapter 2 word count (2500-4000 words), frontmatter metadata (title: "Cognitive Planning with LLMs", sidebar_position: 3, id: chapter-2-cognitive-planning)
+- [X] T042 [US2] Validate Chapter 2 word count (2500-4000 words), frontmatter metadata (title: "Cognitive Planning with LLMs", sidebar_position: 3, id: chapter-2-cognitive-planning)
 - [ ] T043 [US2] Test planner_node.py with GPT-4 API (verify simple command "move to kitchen" → JSON [{action: "navigate", target: "kitchen"}] generated in <5s)
 - [ ] T044 [US2] Test planner_node.py with Llama 3.1 via Ollama (verify complex command "make sandwich" → 8-12 action sequence with valid preconditions, generated in <15s)
 - [ ] T045 [US2] Test plan validation (verify invalid actions rejected, e.g., "fly to ceiling" returns error message, impossible parameters caught before ROS 2 publish)
 - [ ] T046 [US2] Measure LLM planning latency (verify simple tasks <5s for GPT-4 and Llama, complex tasks <15s for GPT-4, <20s for Llama on 16GB RAM system)
-- [ ] T047 [US2] Create llm_task_planner.zip from frontend_book/static/examples/llm_task_planner/ directory (verify <100 MB size limit)
+- [X] T047 [US2] Create llm_task_planner.zip from frontend_book/static/examples/llm_task_planner/ directory (verify <100 MB size limit)
 
 **Checkpoint US2**: Chapter 2 complete (2500-4000 words, 4-6 exercises, 2+ citations, runnable LLM planner achieves 95% valid action sequences, <5s simple / <15s complex latency, .zip download ready)
 
