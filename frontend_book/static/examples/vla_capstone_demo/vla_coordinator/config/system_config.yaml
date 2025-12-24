@@ -1,0 +1,122 @@
+# VLA Capstone Demo - System Configuration
+# Configuration parameters for behavior coordination and subsystems
+
+# Behavior Coordinator Parameters
+behavior_coordinator:
+  max_retries: 2              # Maximum retry attempts per action
+  idle_timeout: 5.0           # Seconds before returning to IDLE after COMPLETED/FAILED
+  execution_update_rate: 2.0  # Hz for status publishing (500ms)
+
+  # State transition timeouts
+  planning_timeout: 30.0      # Maximum time in PLANNING state (seconds)
+  action_timeout: 120.0       # Maximum time for single action (seconds)
+
+  # Failure handling
+  replan_on_failure: true     # Request new plan from LLM on failure
+  request_clarification: true # Publish clarification requests on failure
+
+# Action Executor Parameters
+action_executor:
+  # Navigation parameters (for Nav2 integration)
+  navigation:
+    default_speed: 0.5        # m/s
+    goal_tolerance: 0.1       # meters
+    timeout: 60.0             # seconds
+
+  # Detection parameters (for Isaac ROS integration)
+  detection:
+    confidence_threshold: 0.7  # Minimum detection confidence
+    max_results: 5             # Maximum objects to return
+    timeout: 10.0              # seconds
+
+  # Manipulation parameters
+  manipulation:
+    default_grasp_force: 15.0  # Newtons
+    max_grasp_force: 50.0      # Newtons
+    grasp_timeout: 5.0         # seconds
+
+  # Arm motion parameters
+  arm:
+    joint_speed_limit: 0.5     # rad/s
+    cartesian_speed_limit: 0.2 # m/s
+    motion_timeout: 20.0       # seconds
+
+# Gripper Controller Parameters
+gripper_controller:
+  gripper_speed: 0.05         # m/s (opening/closing speed)
+  update_rate: 20.0           # Hz (state publishing rate)
+
+  # Physical limits
+  min_width: 0.0              # meters (fully closed)
+  max_width: 0.10             # meters (fully open)
+  max_force: 50.0             # Newtons (maximum grip force)
+
+  # Grasp detection
+  force_threshold: 2.0        # N - object contact detection
+  position_tolerance: 0.001   # m - position reached threshold
+
+# System Monitor Parameters
+system_monitor:
+  visualization_rate: 10.0    # Hz (RViz marker update rate)
+  status_update_rate: 2.0     # Hz (status message publishing)
+
+  # RViz marker settings
+  markers:
+    state_sphere_size: 0.3    # meters
+    progress_bar_max_width: 2.0  # meters
+    text_height: 0.2          # meters
+    marker_lifetime: 0.5      # seconds (0 = infinite)
+
+  # TTS settings
+  tts:
+    enabled: true
+    volume: 0.8
+    rate: 1.0                 # Speech rate multiplier
+    avoid_repeat_time: 2.0    # Seconds before repeating same message
+
+# Integration Parameters
+integration:
+  # Topic names (can be remapped in launch file)
+  topics:
+    voice_command: "/whisper/voice_command"
+    task_plan: "/llm/task_plan"
+    execution_status: "/vla/execution_status"
+    clarification_request: "/vla/clarification_request"
+
+  # Frame IDs
+  frames:
+    world: "map"
+    robot_base: "base_link"
+    gripper_base: "gripper_base"
+
+  # Simulation mode (set false for real hardware)
+  simulation_mode: true
+  simulation_speed_factor: 0.2  # Execute actions at 20% of real-time for demo
+
+# Logging Configuration
+logging:
+  level: "INFO"               # DEBUG, INFO, WARN, ERROR
+  log_to_file: false
+  log_directory: "~/.ros/log/vla_capstone"
+
+  # Per-node log levels (override global level)
+  node_levels:
+    behavior_coordinator: "INFO"
+    action_executor: "INFO"
+    system_monitor: "INFO"
+    gripper_controller: "INFO"
+
+# Safety Parameters
+safety:
+  emergency_stop_enabled: true
+  watchdog_timeout: 5.0       # Seconds of no status before emergency stop
+  max_task_duration: 300.0    # Maximum total task time (5 minutes)
+
+  # Workspace limits (for safety monitoring)
+  workspace:
+    x_min: -2.0
+    x_max: 2.0
+    y_min: -2.0
+    y_max: 2.0
+    z_min: 0.0
+    z_max: 2.0

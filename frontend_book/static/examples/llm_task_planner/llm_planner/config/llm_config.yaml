@@ -1,0 +1,64 @@
+# LLM Task Planner Configuration
+
+llm_planner_node:
+  ros__parameters:
+    # LLM Backend Selection
+    # Options: "openai" (GPT-4), "ollama" (Llama 3.1 local)
+    llm_backend: "ollama"  # Change to "openai" for GPT-4
+
+    # Model Selection
+    # OpenAI: "gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"
+    # Ollama: "llama3.1:8b", "llama3.1:70b", "mistral:7b"
+    model: "llama3.1:8b"
+
+    # LLM Parameters
+    # temperature: 0.0 = deterministic (recommended for robotics)
+    # temperature: 1.0 = creative (not recommended for task planning)
+    temperature: 0.0
+
+    # Maximum tokens in LLM response
+    # Typical action plans are 50-300 tokens
+    max_tokens: 500
+
+    # API call timeout in seconds
+    timeout: 30.0
+
+    # OpenAI API Configuration (only used if llm_backend: "openai")
+    # Set OPENAI_API_KEY environment variable before launching
+    # export OPENAI_API_KEY='sk-...'
+    openai_api_key: "${OPENAI_API_KEY}"
+
+    # Ollama Configuration (only used if llm_backend: "ollama")
+    # Ensure Ollama is running: ollama serve
+    # Pull model: ollama pull llama3.1:8b
+    ollama_host: "http://localhost:11434"
+
+    # Retry Logic
+    # Maximum attempts to generate valid plan before giving up
+    max_retries: 3
+
+# Performance Expectations
+
+# Ollama (llama3.1:8b) on CPU:
+# - Simple commands (1-2 actions): 5-10s
+# - Complex commands (5-8 actions): 15-20s
+# - Quality: ~90-93% valid action sequences
+
+# Ollama (llama3.1:8b) on GPU:
+# - Simple commands: 2-5s
+# - Complex commands: 5-10s
+# - Quality: ~90-93% valid action sequences
+
+# OpenAI GPT-4 Turbo:
+# - Simple commands: 2-5s
+# - Complex commands: 5-15s
+# - Quality: ~95-98% valid action sequences
+# - Cost: ~$0.03 per request
+
+# Tips for Best Results
+
+# 1. Use temperature=0 for deterministic, repeatable plans
+# 2. Start with Ollama (free) for development
+# 3. Switch to GPT-4 for production/demos (higher quality)
+# 4. Increase max_retries if network is unstable
+# 5. Monitor generation_time in /task_plan messages

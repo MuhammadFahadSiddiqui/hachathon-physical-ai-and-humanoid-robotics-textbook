@@ -1,0 +1,144 @@
+# Voice Commands Configuration
+# Example commands for testing the Whisper voice recognition system
+
+# Node Parameters (can be overridden in launch file)
+voice_command_node:
+  ros__parameters:
+    # Whisper model size: tiny (39M), base (74M), small (244M), medium (769M), large (1550M)
+    # Recommended: base for testing, small for production (tradeoff: accuracy vs latency)
+    model_size: "base"
+
+    # Confidence threshold (0.0-1.0)
+    # Commands below this threshold will be logged but not published
+    # Recommended: 0.7 for general use, 0.8 for critical commands
+    confidence_threshold: 0.7
+
+    # Audio sample rate in Hz
+    # Whisper is trained on 16kHz audio
+    sample_rate: 16000
+
+    # Microphone device index
+    # -1 for default system microphone
+    # Run 'python -m sounddevice' to list available devices
+    device_index: -1
+
+    # Recording duration in seconds
+    # Each audio chunk is this length before transcription
+    # Shorter = lower latency, Longer = better accuracy for complex commands
+    recording_duration: 3.0
+
+# Example Voice Commands for Testing
+# Speak these commands to test the system
+
+navigation_commands:
+  - "move forward two meters"
+  - "turn left ninety degrees"
+  - "turn right ninety degrees"
+  - "move backward one meter"
+  - "stop"
+  - "go to the kitchen"
+  - "navigate to the charging station"
+
+manipulation_commands:
+  - "pick up the bottle"
+  - "grasp the object"
+  - "open the gripper"
+  - "close the gripper"
+  - "release the object"
+  - "place on the table"
+
+perception_commands:
+  - "detect objects"
+  - "find the red ball"
+  - "scan the environment"
+  - "look at the table"
+
+task_commands:
+  - "bring me a water bottle"
+  - "go to the kitchen and bring me a cup"
+  - "find the bottle on the shelf and bring it to me"
+  - "patrol the room"
+
+system_commands:
+  - "emergency stop"
+  - "reset"
+  - "status"
+  - "shutdown"
+
+# Test Scenarios
+# Use these to validate >90% accuracy requirement
+
+test_set_50_commands:
+  description: "50-command test set for validation (target: >90% accuracy = 45+ correct)"
+
+  simple_commands: # Expected: 20/20 correct
+    - "stop"
+    - "start"
+    - "move forward"
+    - "move backward"
+    - "turn left"
+    - "turn right"
+    - "open gripper"
+    - "close gripper"
+    - "scan"
+    - "reset"
+    - "go home"
+    - "look up"
+    - "look down"
+    - "wave"
+    - "nod"
+    - "stand up"
+    - "sit down"
+    - "raise arm"
+    - "lower arm"
+    - "status"
+
+  moderate_commands: # Expected: 18/20 correct (90%)
+    - "move forward two meters"
+    - "turn left ninety degrees"
+    - "navigate to the kitchen"
+    - "pick up the bottle"
+    - "place on the table"
+    - "detect red objects"
+    - "go to charging station"
+    - "bring me a water bottle"
+    - "open the door"
+    - "close the door"
+    - "check battery status"
+    - "increase speed"
+    - "decrease speed"
+    - "follow the person"
+    - "face the camera"
+    - "wave your right hand"
+    - "point at the object"
+    - "search for obstacles"
+    - "return to start position"
+    - "save current location"
+
+  complex_commands: # Expected: 7/10 correct (70%)
+    - "go to the kitchen and bring me a water bottle from the shelf"
+    - "navigate to the living room then scan for obstacles"
+    - "pick up the red bottle and place it on the table near the window"
+    - "patrol the room and report any detected objects"
+    - "find the charging station and dock when battery is below twenty percent"
+    - "follow the person in front of you while maintaining two meter distance"
+    - "raise your right arm and wave then return to neutral position"
+    - "scan the environment for people and approach the nearest one"
+    - "check if the door is open and navigate through it to the next room"
+    - "pick up all bottles from the table and place them in the bin"
+
+# Troubleshooting: Common Microphone Issues
+# If you get "Error capturing audio" or "No microphone detected":
+#
+# 1. List available devices:
+#    python -c "import sounddevice as sd; print(sd.query_devices())"
+#
+# 2. Test your microphone:
+#    python -c "import sounddevice as sd; import numpy as np; print('Recording...'); audio = sd.rec(32000, samplerate=16000, channels=1); sd.wait(); print('Energy:', np.sqrt(np.mean(audio**2)))"
+#
+# 3. Set device_index explicitly (e.g., device_index: 1)
+#
+# 4. Check permissions:
+#    - Ubuntu: Settings → Privacy → Microphone → Enable for terminal
+#    - macOS: System Preferences → Security & Privacy → Microphone → Allow Terminal
+#    - Windows: Settings → Privacy → Microphone → Allow apps to access

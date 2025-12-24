@@ -49,6 +49,17 @@ const sidebars: SidebarsConfig = {
         'module-3/chapter-3-nav2-bipedal',
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 4: Vision-Language-Action (VLA)',
+      collapsed: false,
+      items: [
+        'module-4/index',
+        'module-4/chapter-1-voice-to-action',
+        'module-4/chapter-2-cognitive-planning',
+        'module-4/chapter-3-capstone-vla',
+      ],
+    },
   ],
 };
 
