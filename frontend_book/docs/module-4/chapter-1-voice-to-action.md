@@ -40,7 +40,7 @@ Whisper is the **first step** in a complete VLA (Vision-Language-Action) system:
 
 1. **Voice Input**: User speaks natural language command → captured by microphone
 2. **Speech-to-Text**: Whisper transcribes audio → "pick up the red cube from the table"
-3. **Language Understanding**: LLM (Chapter 2) decomposes command → action sequence [{navigate, detect_object, grasp}]
+3. **Language Understanding**: LLM (Chapter 2) decomposes command → action sequence `[{navigate, detect_object, grasp}]`
 4. **Action Execution**: Robot executes primitives using Nav2, Isaac ROS perception, gripper control
 5. **Feedback Loop**: Execution status feeds back to user (visual, auditory, or text confirmation)
 

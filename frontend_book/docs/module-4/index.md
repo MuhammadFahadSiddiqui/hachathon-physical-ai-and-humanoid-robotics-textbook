@@ -106,7 +106,7 @@ Translate natural language into executable ROS 2 action sequences using large la
 - Prompt engineering for robot task decomposition
 - Plan validation and error handling
 
-**Runnable Example**: Send "go to the kitchen and bring me a water bottle" → LLM outputs JSON action sequence [{navigate, detect_object, grasp, navigate}] in `<5s`
+**Runnable Example**: Send "go to the kitchen and bring me a water bottle" → LLM outputs JSON action sequence `[{navigate, detect_object, grasp, navigate}]` in `<5s`
 
 **Cost Comparison**: Ollama (free) vs GPT-4 (~$0.03/request)
 
