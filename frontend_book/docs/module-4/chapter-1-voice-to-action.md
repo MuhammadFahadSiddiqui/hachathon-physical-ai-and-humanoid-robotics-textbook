@@ -24,11 +24,11 @@ Natural language is the most intuitive interface for human-robot interaction. In
 
 | Feature | OpenAI Whisper | Traditional ASR (Google STT, Amazon Transcribe) |
 |---------|---------------|--------------------------------------------------|
-| **Training Data** | 680,000 hours multilingual | Domain-specific (often <10,000 hours) |
+| **Training Data** | 680,000 hours multilingual | Domain-specific (often `<10,000` hours) |
 | **Vocabulary** | Open-vocabulary (no word list) | Predefined vocabulary or language model |
 | **Technical Terms** | Recognizes "gripper", "end-effector" out-of-box | Requires custom training for robotics vocabulary |
 | **Noise Robustness** | Excellent (trained on noisy web data) | Moderate (requires clean audio) |
-| **Latency** | ~1-3s (base model on CPU) | <1s (cloud APIs) |
+| **Latency** | ~1-3s (base model on CPU) | `<1s` (cloud APIs) |
 | **Cost** | Free (MIT license) | Pay-per-request (~$0.016/min) |
 | **Privacy** | Fully local processing | Audio sent to cloud servers |
 
@@ -46,7 +46,7 @@ Whisper is the **first step** in a complete VLA (Vision-Language-Action) system:
 
 This chapter focuses on **Step 2**: integrating Whisper with ROS 2 to publish transcribed commands in real-time for downstream planning and execution.
 
-By the end of this chapter, you'll build a ROS 2 node that achieves >90% transcription accuracy on a 50-command test set with <2s latency, ready for integration with LLM planners in Chapter 2.
+By the end of this chapter, you'll build a ROS 2 node that achieves >90% transcription accuracy on a 50-command test set with `<2s` latency, ready for integration with LLM planners in Chapter 2.
 
 ---
 
@@ -101,7 +101,7 @@ Whisper offers 5 model sizes with accuracy/latency tradeoffs:
 | medium | 769M | 5GB | 12s | 2s | 2.3% |
 | large | 1550M | 10GB | 25s | 5s | 2.0% |
 
-**Recommendation for Robotics**: **base model (74M parameters)** balances accuracy (3.0% WER) and latency (1.5s CPU, 0.3s GPU). For real-time applications (<1s latency), use GPU acceleration with tiny/base models.
+**Recommendation for Robotics**: **base model (74M parameters)** balances accuracy (3.0% WER) and latency (1.5s CPU, 0.3s GPU). For real-time applications (`<1s` latency), use GPU acceleration with tiny/base models.
 
 Download the base model:
 
@@ -190,7 +190,7 @@ Whisper is inherently noise-robust (trained on noisy web data), but you can furt
 3. **Voice Activity Detection (VAD)**: Only transcribe when speech detected (saves computation on silence) - libraries like `webrtcvad` or `silero-vad`
 4. **Multi-Channel Audio**: Use microphone arrays (2+ mics) for beamforming (focuses on speaker direction) - requires custom hardware
 
-**Practical Recommendation**: Start with Whisper's built-in robustness. If accuracy <80% in your environment, add USB microphone first, then consider VAD.
+**Practical Recommendation**: Start with Whisper's built-in robustness. If accuracy `<80%` in your environment, add USB microphone first, then consider VAD.
 
 ### ROS 2 Topic Publishing
 
@@ -426,7 +426,7 @@ ros2 run whisper_ros2 voice_command_node
 ros2 topic echo /voice_commands
 ```
 
-Speak commands like "move forward two meters", "pick up the red cube", "stop". You should see transcriptions published to `/voice_commands` with <2s latency.
+Speak commands like "move forward two meters", "pick up the red cube", "stop". You should see transcriptions published to `/voice_commands` with `<2s` latency.
 
 ---
 
@@ -556,9 +556,9 @@ Modify `voice_command_node.py`:
 result = self.model.transcribe(audio.squeeze(), fp16=True)  # Enable FP16 for GPU speedup
 ```
 
-### Issue 3: Low Accuracy <70%
+### Issue 3: Low Accuracy `<70%`
 
-**Symptom**: Whisper transcribes incorrect words frequently, confidence scores <0.70.
+**Symptom**: Whisper transcribes incorrect words frequently, confidence scores `<0.70`.
 
 **Cause**: Noisy environment, poor microphone quality, or unclear speech.
 
@@ -634,7 +634,7 @@ This chapter builds on peer-reviewed research in speech recognition and human-ro
 By completing this chapter, you've learned:
 
 1. ✅ **Install and configure** OpenAI Whisper for robot voice command recognition
-2. ✅ **Integrate Whisper with ROS 2** to publish transcriptions in real-time (<2s latency)
+2. ✅ **Integrate Whisper with ROS 2** to publish transcriptions in real-time (`<2s` latency)
 3. ✅ **Apply confidence thresholding** (70%) to filter noisy transcriptions
 4. ✅ **Optimize for latency** by selecting appropriate model size (base: 74M params, 1.5s CPU latency)
 5. ✅ **Troubleshoot common issues** (microphone detection, GPU acceleration, accuracy tuning)

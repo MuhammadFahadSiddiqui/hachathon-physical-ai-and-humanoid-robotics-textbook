@@ -75,7 +75,7 @@ graph TB
 **1. voice_command_node** (Chapter 1 - Whisper)
 - **Input**: Microphone audio
 - **Output**: `/voice_commands` (std_msgs/String)
-- **Function**: Transcribe speech to text with >90% accuracy, <2s latency
+- **Function**: Transcribe speech to text with >90% accuracy, `<2s` latency
 - **Status**: ✅ Complete from Chapter 1
 
 **2. llm_planner_node** (Chapter 2 - LLM)

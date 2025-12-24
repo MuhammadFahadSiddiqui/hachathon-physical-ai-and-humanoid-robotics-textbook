@@ -61,7 +61,7 @@ ollama pull llama3.1:8b
 Use OpenAI GPT-4 API for production-grade quality:
 
 - **Cost**: ~$0.03 per planning request (~$1-2 for full module completion)
-- **Latency**: <5s for simple plans, <15s for complex tasks
+- **Latency**: `<5s` for simple plans, `<15s` for complex tasks
 - **Quality**: Excellent, state-of-the-art reasoning
 - **Requirements**: OpenAI API key (signup at [platform.openai.com](https://platform.openai.com))
 
@@ -106,7 +106,7 @@ Translate natural language into executable ROS 2 action sequences using large la
 - Prompt engineering for robot task decomposition
 - Plan validation and error handling
 
-**Runnable Example**: Send "go to the kitchen and bring me a water bottle" → LLM outputs JSON action sequence [{navigate, detect_object, grasp, navigate}] in <5s
+**Runnable Example**: Send "go to the kitchen and bring me a water bottle" → LLM outputs JSON action sequence [{navigate, detect_object, grasp, navigate}] in `<5s`
 
 **Cost Comparison**: Ollama (free) vs GPT-4 (~$0.03/request)
 
@@ -124,7 +124,7 @@ Integrate voice, LLM planning, navigation, vision, and manipulation into a compl
 - Failure handling and replanning
 - RViz visualization for debugging (voice commands, task plans, execution status)
 
-**Runnable Example**: Speak "bring me the bottle from the shelf" → humanoid completes full 6-step task autonomously in <2min
+**Runnable Example**: Speak "bring me the bottle from the shelf" → humanoid completes full 6-step task autonomously in `<2min`
 
 **[📥 Download: vla_capstone_demo.zip](/examples/vla_capstone_demo.zip)**
 
@@ -163,7 +163,7 @@ All content grounded in current research (2020-2024) to ensure state-of-the-art 
 
 Each chapter includes dedicated troubleshooting sections addressing common issues:
 
-- **Whisper**: Microphone detection failures, high latency (>5s), low accuracy (<70%), ROS 2 node errors
+- **Whisper**: Microphone detection failures, high latency (>5s), low accuracy (`<70%`), ROS 2 node errors
 - **LLM Planning**: Invalid JSON generation, OpenAI API rate limits, Ollama connection refused, plan execution timeouts
 - **Capstone**: Action primitive timeouts, gripper grasp failures, system stuck in planning state, RViz visualization issues
 

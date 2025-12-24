@@ -12,7 +12,7 @@ Imagine instructing a humanoid robot with the simple command: "Go to the kitchen
 
 In this chapter, you'll build an LLM-based task planner that transforms voice commands from Chapter 1 into structured action sequences for your humanoid robot. Unlike rule-based systems that require manually coding every possible command variant, LLMs leverage billions of parameters trained on internet-scale text data to generalize to novel instructions, understand context, and reason about task feasibility.
 
-**Two LLM Deployment Options**: You can implement this system using either OpenAI's GPT-4 API (cloud-based, ~$0.03 per planning request, <5s latency) or Meta's Llama 3.1 8B model via Ollama (local inference, completely free, 5-15s latency on CPU). Both options produce valid action sequences with >95% accuracy on standard robot tasks, making LLM-based planning accessible regardless of your budget.
+**Two LLM Deployment Options**: You can implement this system using either OpenAI's GPT-4 API (cloud-based, ~$0.03 per planning request, `<5s` latency) or Meta's Llama 3.1 8B model via Ollama (local inference, completely free, 5-15s latency on CPU). Both options produce valid action sequences with >95% accuracy on standard robot tasks, making LLM-based planning accessible regardless of your budget.
 
 **The VLA Research Foundation**: This chapter builds on cutting-edge Vision-Language-Action (VLA) research. Google's **SayCan** (2022) pioneered grounding language models in robot affordances by combining LLM task planning with learned value functions to ensure physical feasibility. Liang et al.'s **Code as Policies** (2022) demonstrated that LLMs can generate executable robot code directly from natural language, treating planning as a code generation problem. These papers established that modern LLMs possess sufficient world knowledge and reasoning capabilities for real-world robot control when properly constrained to valid action primitives.
 
@@ -76,7 +76,7 @@ The server runs on `localhost:11434` and provides an OpenAI-compatible REST API.
 
 **Advantages**:
 - **Quality**: ~95-98% valid action sequences, handles ambiguous commands better
-- **Latency**: <5s for simple plans, <15s for complex (faster than local Llama on CPU)
+- **Latency**: `<5s` for simple plans, `<15s` for complex (faster than local Llama on CPU)
 - **No Hardware Requirements**: Runs on minimal RAM, offloads to cloud
 - **Latest Models**: Access to GPT-4 Turbo, GPT-4o (vision-capable) when released
 
@@ -183,7 +183,7 @@ Our humanoid uses 12 action primitives covering navigation, perception, and mani
 6. **`grasp`**: Close gripper around detected object
    - Parameters: `object_id` (from detect_object), `force` (Newtons)
    - Example: `{"action": "grasp", "object_id": "bottle_0", "force": 10.0}`
-   - Precondition: Object must be within gripper reach (<0.5m)
+   - Precondition: Object must be within gripper reach (`<0.5m`)
 
 7. **`release`**: Open gripper and drop held object
    - Parameters: None
@@ -678,4 +678,4 @@ timeout = action["expected_duration"] * 1.5  # 50% buffer
 
 ---
 
-**Next Chapter**: [Chapter 3 - Capstone: Autonomous Humanoid VLA](./chapter-3-capstone-vla.md) integrates voice commands, LLM planning, navigation, vision, and manipulation into a complete autonomous system. You'll deploy the full VLA pipeline in Isaac Sim and execute end-to-end tasks like "bring me the bottle from the shelf" autonomously in <2 minutes.
+**Next Chapter**: [Chapter 3 - Capstone: Autonomous Humanoid VLA](./chapter-3-capstone-vla.md) integrates voice commands, LLM planning, navigation, vision, and manipulation into a complete autonomous system. You'll deploy the full VLA pipeline in Isaac Sim and execute end-to-end tasks like "bring me the bottle from the shelf" autonomously in `<2` minutes.
