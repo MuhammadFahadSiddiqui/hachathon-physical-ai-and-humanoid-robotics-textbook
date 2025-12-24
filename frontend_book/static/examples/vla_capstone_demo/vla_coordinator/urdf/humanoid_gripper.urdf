@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!--
+  Humanoid Gripper URDF - Two-Finger Parallel Gripper
+
+  This URDF defines a simple two-finger parallel gripper that can be attached
+  to a humanoid robot's wrist. It consists of a gripper base and two symmetric
+  finger links.
+
+  Author: Module 4 - Vision-Language-Action (VLA)
+  License: MIT
+-->
+<robot name="humanoid_gripper">
+
+  <!-- Gripper Base Link -->
+  <link name="gripper_base">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.06 0.04 0.03"/>
+      </geometry>
+      <material name="gripper_base_material">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.06 0.04 0.03"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+               iyy="0.0001" iyz="0.0"
+               izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Left Finger Link -->
+  <link name="gripper_left_finger">
+    <visual>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.015 0.02"/>
+      </geometry>
+      <material name="finger_material">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.015 0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.02"/>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+               iyy="0.00001" iyz="0.0"
+               izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <!-- Right Finger Link -->
+  <link name="gripper_right_finger">
+    <visual>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.015 0.02"/>
+      </geometry>
+      <material name="finger_material">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.015 0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.02"/>
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+               iyy="0.00001" iyz="0.0"
+               izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <!-- Left Finger Joint (Prismatic) -->
+  <joint name="gripper_left_finger_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="gripper_left_finger"/>
+    <origin xyz="0.03 0.0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="0.05" effort="50.0" velocity="0.1"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <!-- Right Finger Joint (Prismatic) -->
+  <joint name="gripper_right_finger_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="gripper_right_finger"/>
+    <origin xyz="0.03 0.0 0" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.0" upper="0.05" effort="50.0" velocity="0.1"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <!-- Gripper Tip Frame (for manipulation planning) -->
+  <link name="gripper_tip"/>
+  <joint name="gripper_tip_joint" type="fixed">
+    <parent link="gripper_base"/>
+    <child link="gripper_tip"/>
+    <origin xyz="0.08 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Optional: Attachment point for wrist (this would connect to the humanoid arm) -->
+  <!-- Uncomment and modify if attaching to specific humanoid robot -->
+  <!--
+  <joint name="wrist_to_gripper_joint" type="fixed">
+    <parent link="wrist_link"/>
+    <child link="gripper_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  -->
+
+  <!-- Transmission for Left Finger (for Gazebo/Isaac Sim control) -->
+  <transmission name="gripper_left_finger_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_left_finger_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_left_finger_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Transmission for Right Finger (for Gazebo/Isaac Sim control) -->
+  <transmission name="gripper_right_finger_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_right_finger_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_right_finger_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Gazebo/Isaac Sim Plugin Configuration (optional) -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/gripper</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <!-- Gripper Controller Parameters (for ros2_control) -->
+  <ros2_control name="GripperSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="gripper_left_finger_joint">
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.05</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">0</param>
+        <param name="max">50</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="gripper_right_finger_joint">
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">0.05</param>
+      </command_interface>
+      <command_interface name="effort">
+        <param name="min">0</param>
+        <param name="max">50</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+</robot>
