@@ -160,7 +160,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Governor Sindh IT Initiative. Built with Docusaurus.`,
+      copyright: `Copyright © Muhammad Fahad Siddiqui`,
     },
     prism: {
       theme: prismThemes.github,
